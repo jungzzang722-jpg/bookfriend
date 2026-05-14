@@ -1280,36 +1280,51 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;font-family:syste
 <div class="snav R"><button class="snb" onclick="next()">›</button></div>
 
 <script>
+  function showSaveState(){
+
+  const el = document.getElementById('saveState');
+
+  if(!el) return;
+
+  el.innerText = "📁 보관함에 저장중...";
+
+  setTimeout(()=>{
+
+    el.innerText = "📁 보관함에 저장됨";
+
+  }, 1200);
+
+}
 let c=1;
 const TOTAL=26;
 const archiveScreens=[12,13,14,24,25,26];
 
 function goTo(n){
   if(n<1||n>TOTAL||n===c)return;
+
   const pe=document.getElementById('s'+c);
   const ne=document.getElementById('s'+n);
+
   pe.classList.remove('active');
   pe.classList.add('out');
+
   setTimeout(()=>pe.classList.remove('out'),320);
+
   ne.classList.add('active');
   c=n;
+
   document.getElementById('ind').textContent=c+'/'+TOTAL;
-   if(n===11){
 
-    showSaveState();
-
+  if(n===11){
+    showSaveState(); // ✅ 여기서 실행됨
   }
 
   if(n===22){
-
     setTimeout(()=>{if(c===22)goTo(8)},2200);
-
   }
-
 }
   // S22 로딩 → 2.2초 후 S8로 자동 이동
-  if(n===22) setTimeout(()=>{if(c===22)goTo(8)},2200);
-}
+  
 function next(){goTo(c<TOTAL?c+1:1)}
 function prev(){goTo(c>1?c-1:TOTAL)}
 
@@ -1390,24 +1405,7 @@ function autoSaveFlow(){
 
 }
 
-// S11 들어오면 실행
-document.addEventListener('DOMContentLoaded', ()=>{
-  const s11 = document.getElementById('s11');
 
-  if(s11){
-    s11.addEventListener('click', autoSaveFlow);
-  }
-
-  function showSaveState(){
-  const el = document.getElementById('saveState');
-
-  el.innerText = "📁 보관함에 저장중...";
-
-  setTimeout(()=>{
-    el.innerText = "📁 보관함에 저장됨";
-  }, 1200);
-}
-});
 </script>
 </body>
 </html>
