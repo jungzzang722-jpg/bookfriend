@@ -51,8 +51,6 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;font-family:syste
 .dots{display:flex;justify-content:center;gap:7px}
 .dot{width:6px;height:6px;border-radius:3px;background:rgba(62,32,16,.15);transition:all .3s}
 .dot.on{width:20px;background:var(--bg)}
-.dot-w{width:6px;height:6px;border-radius:3px;background:rgba(212,169,106,.3);transition:all .3s}
-.dot-w.on{width:20px;background:var(--bg)}
 
 .obwrap{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:50px 30px calc(var(--sab) + 78px);cursor:pointer}
 .obbg{position:absolute;inset:0}
@@ -65,7 +63,7 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;font-family:syste
 .ob-dots-dark{position:absolute;bottom:calc(var(--sab) + 52px);left:0;right:0;display:flex;justify-content:center;gap:7px;z-index:10}
 
 /* chat */
-.chatbody{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 20px 20px;display:flex;flex-direction:column;gap:16px}
+.chatbody{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 20px calc(var(--sab) + 90px);display:flex;flex-direction:column;gap:16px}
 .chatbody::-webkit-scrollbar{display:none}
 .cmsg{max-width:84%}
 .cmsg.bot{align-self:flex-start}.cmsg.user{align-self:flex-end}
@@ -512,7 +510,7 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;font-family:syste
     </div>
   </div>
   <div class="body cx" style="padding:0 18px 28px">
-    <div class="qcard" style="margin-bottom:14px" onclick="goTo(14)">
+    <div class="qcard" style="margin-bottom:14px" onclick="goTo(12)">
       <span class="qmark">"</span>
       <div class="qtext">세상은 나 없이도 잘 돌아갔고, 나는 그 틈에서 조용히 숨을 쉬고 있었다.</div>
       <span class="qmark-r">"</span>
@@ -568,7 +566,7 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;font-family:syste
     </div>
   </div>
   <div class="body cx" style="padding:0 18px 28px">
-    <div class="qcard" style="margin-bottom:14px" onclick="goTo(14)">
+    <div class="qcard" style="margin-bottom:14px" onclick="goTo(13)">
       <span class="qmark">"</span>
       <div class="qtext">아무것도 하지 않는 것이 가장 어려운 일이었다.</div>
       <span class="qmark-r">"</span>
@@ -659,7 +657,7 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;font-family:syste
   <div class="body cx" style="padding-bottom:100px">
     <div class="bcover">
       <div style="position:absolute;top:calc(var(--sat) + 14px);left:18px;z-index:10">
-        <div class="back" onclick="goTo(8)" style="background:rgba(255,255,255,.15);backdrop-filter:blur(8px)">←</div>
+        <div class="back" onclick="history.length>1?history.back():goTo(8)" style="background:rgba(255,255,255,.15);backdrop-filter:blur(8px)">←</div>
       </div>
       <div style="width:112px;height:160px;background:rgba(255,255,255,.1);border-radius:4px 8px 8px 4px;border-left:5px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px">
         <div style="font-size:30px">📖</div>
