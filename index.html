@@ -17,8 +17,11 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;font-family:syste
 .screen{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;transform:translateX(26px);overflow:hidden;background:var(--cr);display:flex;flex-direction:column}
 .screen.active{opacity:1;pointer-events:all;transform:translateX(0)}
 .screen.out{opacity:0;transform:translateX(-26px)}
-.cx{max-width:480px;width:100%;margin:0 auto}
-
+.cx{
+  max-width:100%;   /* 기존 480px 제거 */
+  width:100%;
+  margin:0 auto;
+}
 .ind{display:none}
 .snav{display:none}
 
@@ -65,9 +68,21 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;font-family:syste
 .ob-dots-dark{position:absolute;bottom:calc(var(--sab) + 52px);left:0;right:0;display:flex;justify-content:center;gap:7px;z-index:10}
 
 /* chat */
-.chatbody{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 20px 20px;display:flex;flex-direction:column;gap:16px}
-.chatbody::-webkit-scrollbar{display:none}
-.cmsg{max-width:84%}
+.chatbody{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding:14px 20px 20px;
+
+  /* 🔥 추가 */
+  transform:translateZ(0);
+  will-change:transform;
+}
+.cmsg{
+  max-width:84%;
+  transform:translateZ(0);
+}
 .cmsg.bot{align-self:flex-start}.cmsg.user{align-self:flex-end}
 .cbubble{padding:15px 18px;border-radius:20px;font-size:15px;line-height:1.72}
 .cmsg.bot .cbubble{background:#fff;color:var(--dk);box-shadow:0 1px 8px rgba(62,32,16,.07)}
@@ -176,7 +191,7 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;font-family:syste
 </div>
 
 <!-- ═══ S2 · TUTORIAL 환영 ═══ -->
-<div class="screen" id="s2">
+<div class="screen" id="s2" onclick="goTo(3)">
   <div style="flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;width:100%">
   <div class="cx" style="display:flex;flex-direction:column;padding:calc(var(--sat) + 36px) 28px calc(var(--sab) + 28px);min-height:100%">
     <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
@@ -198,7 +213,7 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;font-family:syste
         </div>
       </div>
     </div>
-    <button class="btn" onclick="goTo(3)" style="margin-top:28px">어떻게 쓰는지 볼게요 →</button>
+    <button class="btn" onclick="event.stopPropagation(); goTo(3)">
     <div style="text-align:center;margin-top:14px;font-size:12px;color:var(--br);opacity:.32;cursor:pointer" onclick="goTo(7)">건너뛰고 바로 시작</div>
   </div>
   </div>
@@ -240,7 +255,7 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;font-family:syste
         <div style="text-align:center;margin-top:13px;font-size:12px;color:var(--br);opacity:.42">마음에 가장 가까운 카드를 탭해</div>
       </div>
     </div>
-    <button class="btn" onclick="goTo(4)" style="margin-top:20px">다음 →</button>
+   <button class="btn" onclick="event.stopPropagation(); goTo(4)">
   </div>
   </div>
 </div>
@@ -301,7 +316,7 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;font-family:syste
         </div>
       </div>
     </div>
-    <button class="btn" onclick="goTo(6)" style="margin-top:20px">다음 →</button>
+    <button class="btn" onclick="event.stopPropagation(); goTo(6)">
   </div>
   </div>
 </div>
@@ -456,7 +471,8 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;font-family:syste
   <div class="cx" style="flex-shrink:0;padding:calc(var(--sat) + 12px) 18px 13px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--lb)">
     <div class="back" onclick="goTo(10)">←</div>
     <div style="width:36px;height:36px;background:var(--bg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📖</div>
-    <div><div style="font-size:15px;font-weight:600;color:var(--dk)">책친구</div><div style="font-size:11px;color:var(--br);opacity:.58">대화 마무리</div></div>
+    <div><div style="text-align:center;margin-top:10px;font-size:12px;color:var(--br);opacity:.5">
+  📁 보관함에 저장중...
   </div>
   <div class="chatbody cx">
     <div class="cmsg bot">
@@ -1329,6 +1345,23 @@ function toggleMenu(){
 function closeMenu(){
   document.getElementById('navmenu').style.display='none';
 }
+<script>
+function autoSaveFlow(){
+
+  setTimeout(()=>{
+    goTo(12); // 보관함으로 이동
+  }, 1800);
+
+}
+
+// S11 들어오면 실행
+document.addEventListener('DOMContentLoaded', ()=>{
+  const s11 = document.getElementById('s11');
+
+  if(s11){
+    s11.addEventListener('click', autoSaveFlow);
+  }
+});
 </script>
 </body>
 </html>
